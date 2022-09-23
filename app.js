@@ -1,18 +1,17 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
+
 
 app.get('/', (req, res) => {
   res.send("Succes")
 });
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
+
+let server = app.listen(443, function () {
+  console.log("Portal running on port: " + 443);
 });
 
-server.listen(443, () => {
-  console.log('listening on *:443');
-});
+//WebSocket logic. Cleanup later.
+let io = require("socket.io")(server);
+app.set('io', io);
+io.use((socket, next) => {}).on("connection", function (socket) {console.log("New websocket connection")});
