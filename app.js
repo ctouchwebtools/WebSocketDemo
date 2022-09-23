@@ -14,4 +14,7 @@ let server = app.listen(443, function () {
 //WebSocket logic. Cleanup later.
 let io = require("socket.io")(server);
 app.set('io', io);
-io.use((socket, next) => {}).on("connection", function (socket) {console.log("New websocket connection")});
+io.use((socket, next) => {
+    next();
+   
+}).on("connection", function (socket) {console.log("New websocket connection")});
