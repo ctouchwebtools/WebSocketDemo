@@ -17,4 +17,10 @@ app.set('io', io);
 io.use((socket, next) => {
     next();
    
-}).on("connection", function (socket) {console.log("New websocket connection")});
+}).on("connection", function (socket) {
+    console.log("New websocket connection")
+    socket.on("test", function () {
+        socket.emit("test","test")
+      });
+
+});
